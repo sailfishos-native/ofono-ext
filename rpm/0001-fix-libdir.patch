@@ -1,0 +1,18 @@
+diff --git a/Makefile b/Makefile
+index 69cbd91..1ca95f3 100644
+--- a/Makefile
++++ b/Makefile
+@@ -2,7 +2,12 @@
+ OFONO_DIR ?= ../../work/ofono
+ GUTIL_DIR ?= ../libglibutil
+ PREFIX    ?= /usr
+-LIBDIR    ?= $(PREFIX)/lib
++MACHINETYPE ?= $(shell echo "$$(uname -m)")
++ifeq ($(MACHINETYPE),aarch64)
++    LIBDIR := $(PREFIX)/lib64
++else
++    LIBDIR := $(PREFIX)/lib
++endif
+ PLUGINDIR ?= $(LIBDIR)/ofono/plugins
+ VERSION   ?= 2.19
+ STORAGEDIR?= /var/lib/ofono
